@@ -56,8 +56,13 @@ const getPublicKey = privateKey => {
  *   not the message itself!
  */
 const sign = (privateKey, message) => {
-  // hash message with sha-256
-  // sign message and privateKey
+  // convert private key and message to hex buffer
+  // hash, update and digest message into hex string
+  // create and return hex signature
+  privateKey = Buffer.from(privateKey, 'hex');
+  const hash = Buffer.from(createHash('sha256').update(message).digest('hex'), 'hex');
+  const signature = secp256k1.sign(hash, privateKey).signature.toString('hex');
+  return signature; 
 };
 
 /**
