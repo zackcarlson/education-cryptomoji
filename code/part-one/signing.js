@@ -35,7 +35,8 @@ const createPrivateKey = () => {
  *   not hex strings! You'll have to convert the private key.
  */
 const getPublicKey = privateKey => {
-  // Your code here
+  // convert private hex key to buffer
+  // use private buffer key to generate public key
 
 };
 
