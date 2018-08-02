@@ -56,8 +56,8 @@ const getPublicKey = privateKey => {
  *   not the message itself!
  */
 const sign = (privateKey, message) => {
-  // Your code here
-
+  // hash message with sha-256
+  // sign message and privateKey
 };
 
 /**
