@@ -76,8 +76,14 @@ const sign = (privateKey, message) => {
  *   // false
  */
 const verify = (publicKey, message, signature) => {
-  // Your code here
-
+  // hash, update, digest message into hex buffer
+  // conver sig and pubKey to hex buffer
+  // verify credentials
+  const hash = Buffer.from(createHash('sha256').update(message).digest('hex'), 'hex');
+  const sig = Buffer.from(signature, 'hex');
+  const pubKey = Buffer.from(publicKey, 'hex');
+  const isVerified = secp256k1.verify(hash, sig, pubKey);
+  return isVerified;
 };
 
 module.exports = {
