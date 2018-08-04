@@ -94,8 +94,7 @@ class Blockchain {
    * Simply returns the last block added to the chain.
    */
   getHeadBlock() {
-    // Your code here
-
+    return this.blocks[0];
   }
 
   /**
