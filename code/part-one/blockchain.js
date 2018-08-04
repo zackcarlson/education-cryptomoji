@@ -94,7 +94,7 @@ class Blockchain {
    * Simply returns the last block added to the chain.
    */
   getHeadBlock() {
-    return this.blocks[0];
+    return this.blocks[this.blocks.length - 1];
   }
 
   /**
@@ -102,8 +102,10 @@ class Blockchain {
    * adding it to the chain.
    */
   addBlock(transactions) {
-    // Your code here
-
+    let previousHash = this.blocks[this.blocks.length - 1].previousHash;
+    let newBlock = new Block(transactions, previousHash);
+    newBlock.previousHash = createHash('sha256').update(String(previousHash)).digest('hex');
+    this.blocks.push(newBlock);
   }
 
   /**
@@ -120,6 +122,15 @@ class Blockchain {
 
   }
 }
+
+let blockchain = new Blockchain();
+const signer = signing.createPrivateKey();
+const recipient = signing.getPublicKey(signing.createPrivateKey());
+const transaction = new Transaction(signer, recipient, 100);
+blockchain.addBlock([transaction]);
+const transaction2 = new Transaction(signer, recipient, 200);
+blockchain.addBlock([transaction2]);
+console.log(blockchain);
 
 module.exports = {
   Transaction,
